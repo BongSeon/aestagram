@@ -18,6 +18,24 @@
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
+
+    <q-footer elevated>
+      <q-toolbar>
+        <q-tabs>
+          <q-tab
+            icon="mail"
+            name="home"
+            label="Home"
+          />
+          <q-tab
+            icon="alarm"
+            name="camera"
+            label="Camera"
+          />
+        </q-tabs>
+      </q-toolbar>
+    </q-footer>
+
     <q-page-container>
       <router-view />
     </q-page-container>
