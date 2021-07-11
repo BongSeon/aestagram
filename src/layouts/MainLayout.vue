@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header>
       <q-toolbar>
         <q-btn
           flat
@@ -19,21 +19,28 @@
       </q-toolbar>
     </q-header>
 
-    <q-footer elevated>
-      <q-toolbar>
-        <q-tabs>
-          <q-tab
-            icon="mail"
-            name="home"
-            label="Home"
-          />
-          <q-tab
-            icon="alarm"
-            name="camera"
-            label="Camera"
-          />
-        </q-tabs>
-      </q-toolbar>
+    <q-footer
+      class="bg-white"
+      bordered
+    >
+      <q-tabs
+        class="text-grey-10"
+        active-color="primary"
+        indicator-color="transparent"
+      >
+        <q-route-tab
+          to="/"
+          icon="mail"
+          name="home"
+          label="Home"
+        />
+        <q-route-tab
+          to="/Camera"
+          icon="alarm"
+          name="camera"
+          label="Camera"
+        />
+      </q-tabs>
     </q-footer>
 
     <q-page-container>
