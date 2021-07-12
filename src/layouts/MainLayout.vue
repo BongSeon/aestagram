@@ -4,7 +4,9 @@
       class="bg-white text-grey-10"
       bordered
     >
-      <q-toolbar>
+      <q-toolbar
+        class="constrain"
+      >
         <q-btn
           to="/camera"
           class="large-screen-only q-mr-sm"
