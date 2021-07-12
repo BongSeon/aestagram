@@ -7,12 +7,17 @@
       <q-toolbar>
         <q-btn
           to="/camera"
-          class="large-screen-only"
+          class="large-screen-only q-mr-sm"
           icon="eva-camera-outline"
           size="18px"
           flat
           round
           dense
+        />
+        <q-separator
+          class="large-screen-only"
+          vertical
+          spaced
         />
         <q-toolbar-title class="text-grand-hotel text-bold">
           Aestagram
@@ -67,9 +72,13 @@ export default {
 </script>
 
 <style lang="sass">
+  .q-toolbar
+    @media (min-width: $breakpoint-sm-min)
+      height: 77px
   .q-toolbar__title
-    text-align: center
     font-size: 30px
+    @media (max-width: $breakpoint-xs-max)
+      text-align: center  
   .q-footer
     .q-tab__icon
       font-size: 30px
