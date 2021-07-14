@@ -13,13 +13,46 @@
         size="lg"
         icon="eva-camera"
       />
+      <div class="row justify-center q-ma-md">
+        <q-input
+          v-model="text"
+          class="col-6"
+          label="Caption"
+          dense
+        />
+      </div>
+      <div class="row justify-center q-ma-md">
+        <q-input
+          v-model="text"
+          class="col-6"
+          label="Location"
+          dense
+        >
+          <template v-slot:append>
+            <q-btn round dense flat icon="eva-navigation-2-outline" />
+          </template>
+        </q-input>
+      </div>
+      <div class="row justify-center q-mt-lg">
+        <q-btn
+          unelevated
+          rounded
+          color="primary"
+          label="Post Image"
+        />
+      </div>
     </div>
   </q-page>
 </template>
 
 <script>
 export default {
-  name: 'PageCamera'
+  name: 'PageCamera',
+  data() {
+    return {
+      
+    }
+  }
 }
 </script>
 
