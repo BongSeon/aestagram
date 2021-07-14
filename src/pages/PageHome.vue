@@ -3,7 +3,7 @@
     class="constrain q-pa-md"
   >
     <div class="row q-col-gutter-lg">
-      <div class="col-8">
+      <div class="col-12 col-sm-8">
         <q-card
           v-for="post in posts"
           :key="post.id"
@@ -50,7 +50,7 @@
           <q-item-section>
             <q-item-label>aestas_kwak</q-item-label>
             <q-item-label caption>
-              BongSeon Kwak
+              Aestas Kwak
             </q-item-label>
           </q-item-section>
         </q-item>
