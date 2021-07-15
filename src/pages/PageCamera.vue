@@ -1,12 +1,14 @@
 <template>
   <q-page class="constrain-more q-pa-md">
     <div class="camera-frame q-pa-md">
-      <video 
+      <video
+        v-show="!ImageCaptured"
         ref="video"
         class="full-width"
         autoplay
       />
       <canvas
+        v-show="ImageCaptured"
         ref="canvas"
         class="full-width"
         height="240"
@@ -64,7 +66,8 @@ export default {
         caption: '',
         location: '',
         id: uid()
-      }
+      },
+      ImageCaptured: false
     }
   },
   methods: {
@@ -82,6 +85,7 @@ export default {
       canvas.height = video.getBoundingClientRect().height
       let context = canvas.getContext('2d')
       context.drawImage(video, 0,0, canvas.width, canvas.height)
+      this.ImageCaptured = true
     }
   },
   mounted() {
