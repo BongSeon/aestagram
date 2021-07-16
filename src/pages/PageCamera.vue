@@ -51,7 +51,13 @@
           dense
         >
           <template v-slot:append>
-            <q-btn round dense flat icon="eva-navigation-2-outline" />
+          <q-btn
+            @click="getLocation"
+            icon="eva-navigation-2-outline"
+            dense
+            flat
+            round
+          />
           </template>
         </q-input>
       </div>
@@ -154,6 +160,24 @@ export default {
       // write the ArrayBuffer to a blob, and you're done
       var blob = new Blob([ab], {type: mimeString});
       return blob;
+    },
+    getLocation() {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.getCityAndCountry(position)
+      }, err => {
+        console.log('errr:', err);
+      }, { timeout: 7000})
+    },
+    getCityAndCountry(position) {
+      let apiUrl = `https://geocode.xyz/${ position.coords.latitude },${ position.coords.longitude }?json=1`
+      this.$axios.get(apiUrl).then(result => {
+        this.post.location = result.data.city
+        if (result.data.country) {
+          this.post.location += `, ${result.data.country}`
+        }
+      }).catch(err => {
+        console.log('err:', err);
+      })
     }
   },
   mounted() {
