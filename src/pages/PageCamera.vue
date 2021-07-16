@@ -171,12 +171,21 @@ export default {
     getCityAndCountry(position) {
       let apiUrl = `https://geocode.xyz/${ position.coords.latitude },${ position.coords.longitude }?json=1`
       this.$axios.get(apiUrl).then(result => {
-        this.post.location = result.data.city
-        if (result.data.country) {
-          this.post.location += `, ${result.data.country}`
-        }
+        this.locationSuccess(result)
       }).catch(err => {
-        console.log('err:', err);
+        this.locationError()
+      })
+    },
+    locationSuccess(result) {
+      this.post.location = result.data.city
+      if (result.data.country) {
+        this.post.location += `, ${result.data.country}`
+      }
+    },
+    locationError() {
+      this.$q.dialog({
+        title: 'Error',
+        message: '위치를 찾을 수 없습니다.'
       })
     }
   },
