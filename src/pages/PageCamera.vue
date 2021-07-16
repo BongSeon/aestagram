@@ -46,12 +46,14 @@
       <div class="row justify-center q-ma-md">
         <q-input
           v-model="post.location"
+          :loading="locationLoading"
           class="col col-sm-6"
           label="Location"
           dense
         >
           <template v-slot:append>
           <q-btn
+            v-if="!locationLoading"
             @click="getLocation"
             icon="eva-navigation-2-outline"
             dense
@@ -90,7 +92,8 @@ export default {
       },
       ImageCaptured: false,
       imageUpload: [],
-      hasCameraSupport: true
+      hasCameraSupport: true,
+      locationLoading: false
     }
   },
   methods: {
@@ -162,11 +165,12 @@ export default {
       return blob;
     },
     getLocation() {
+      this.locationLoading = true
       navigator.geolocation.getCurrentPosition(position => {
         this.getCityAndCountry(position)
       }, err => {
-        console.log('errr:', err);
-      }, { timeout: 7000})
+        locationError()
+      }, { timeout: 7000 })
     },
     getCityAndCountry(position) {
       let apiUrl = `https://geocode.xyz/${ position.coords.latitude },${ position.coords.longitude }?json=1`
@@ -181,12 +185,14 @@ export default {
       if (result.data.country) {
         this.post.location += `, ${result.data.country}`
       }
+      this.locationLoading = false
     },
     locationError() {
       this.$q.dialog({
         title: 'Error',
         message: '위치를 찾을 수 없습니다.'
       })
+      this.locationLoading = false
     }
   },
   mounted() {
