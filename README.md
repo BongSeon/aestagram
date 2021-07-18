@@ -7,6 +7,11 @@ A Quasar Framework app
 npm install
 ```
 
+### npm start
+### npm run deploy
+### https://aestagram-backend.herokuapp.com/posts
+
+
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
 quasar dev

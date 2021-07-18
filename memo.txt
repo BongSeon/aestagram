@@ -1,0 +1,7 @@
+
+herokubuilds deploy 에러 : 
+nodemon 글로벌 설치 이외에 로컬로 깔아줘야한다.
+backend 에서 npm install nodemon --save
+
+Web process failed to bind to $PORT within 60 seconds of launch << 에러
+app.listen(process.env.PORT || 3000) << 해결
