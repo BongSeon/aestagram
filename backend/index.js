@@ -11,11 +11,20 @@
   const app = express()
 
 /*
-  endpoint
+  endpoint - posts
 */
-  app.get('/', (request, response) => {
-    response.send('I love Mihye SO hard!')
-    console.log('Our endpoint is working')
+  app.get('/posts', (request, response) => {
+    let posts = [
+      {
+        caption: 'Golden Gate Bridge',
+        location: 'San Francisco'
+      },
+      {
+        caption: 'London Eye',
+        location: 'Londom'
+      }
+    ]
+    response.send(posts)
   })
 
 /*
