@@ -1,0 +1,32 @@
+backend
+1. npm init
+2. npm install express --save (express js 설치)
+3. test : node index.js
+4. nodemon 설치 (auto restart)
+  npm install -g nodemon
+  nodemon index.js (으로 index.js 실행해본다)
+5. heroku cli 설치 (brew.sh에서 업데이트 먼저 해줬음)
+  brew tap heroku/brew && brew install heroku
+6. heroku-builds 플러그인 설치
+  heroku plugins:install heroku-builds
+7. 로컬에 빌드 설치, deploy
+  heroku builds:create -a aestagram-backend => npm run deploy
+  (error)
+  npm install nodmon --save (nodemon을 백엔드 로컬에 설치)
+  (error)
+  app.listen(process.env.PORT || 3000)
+
+    herokubuilds deploy 에러 : 
+    nodemon 글로벌 설치 이외에 로컬로 깔아줘야한다.
+    backend 에서 npm install nodemon --save
+
+    Web process failed to bind to $PORT within 60 seconds of launch << 에러
+    app.listen(process.env.PORT || 3000) << 해결
+8. firebase 연결 
+  로컬에 설치
+    npm install firebase-admin --save
+  서비스어카운트키 파일 다운로드
+    const serviceAccount = require('./serviceAccountKey.json'); 경로에 지정
+  https://aestagram-backend.herokuapp.com/posts 테스트 성공
+  node index.js
+  localhost:3000/posts 같은 결과
