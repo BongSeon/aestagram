@@ -74,7 +74,10 @@ export default {
       this.$axios.get('http://localhost:3000/posts').then(response => {
         this.posts = response.data
       }).catch(err => {
-        console.log("axios get error: ", err)
+        this.$q.dialog({
+          title: 'Error',
+          message: '포스트를 가져올 수 없습니다.'
+        })
       })
     }
   },
