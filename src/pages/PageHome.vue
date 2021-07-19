@@ -70,23 +70,23 @@ export default {
         {
           id: 1,
           caption: 'A dog sitting with his back to a person',
-          date: 1626087723855,
+          date: 1626087722222,
           location: 'Seoul, Korea',
-          imageUrl: 'https://i.imgur.com/YELXq4a.jpeg'
+          imageUrl: 'https://firebasestorage.googleapis.com/v0/b/aestagram-kwak.appspot.com/o/dog1.jpg?alt=media&token=dc5e28db-ebef-4f35-8b42-20571b0e63bf'
         },
         {
           id: 2,
           caption: 'A dog sitting with his back to a person',
           date: 1626087723855,
           location: 'Seoul, Korea',
-          imageUrl: 'https://i.imgur.com/jemygjO.jpeg'
+          imageUrl: 'https://firebasestorage.googleapis.com/v0/b/aestagram-kwak.appspot.com/o/dog2.jpg?alt=media&token=7b17d815-7aa8-4053-87f1-bd42796b9fb6'
         },
         {
           id: 3,
           caption: 'A dog sitting with his back to a person',
-          date: 1626087723855,
+          date: 1626087744855,
           location: 'Seoul, Korea',
-          imageUrl: 'https://i.imgur.com/S3PbfD5.jpeg'
+          imageUrl: 'https://firebasestorage.googleapis.com/v0/b/aestagram-kwak.appspot.com/o/dog3.jpg?alt=media&token=d8d082a2-84d3-4c37-83cf-7f5260dad0fe'
           //imageUrl: require('../assets/dog3.jpeg'), 
         }
       ]
@@ -95,7 +95,11 @@ export default {
   methods: {
     getPosts() {
       this.$axios.get('http://localhost:3000/posts').then(response => {
-        console.log("🚀 ~ file: PageHome.vue ~ line 98 ~ this.$axios.get ~ response", response)
+        response.data.forEach(post => {
+          this.posts.push(post)
+        });
+      }).catch(err => {
+        console.log("axios get error: ", err)
       })
     }
   },
