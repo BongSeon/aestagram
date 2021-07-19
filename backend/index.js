@@ -28,6 +28,9 @@
   endpoint - posts
 */
   app.get('/posts', (request, response) => {
+    // CORS 세팅 : 모든 origin에 대해 모두 허용
+    response.set('Access-Control-Allow-Origin', '*')
+
     let posts = []
 
     db.collection('posts').get().then(snapshot => {
