@@ -4,7 +4,7 @@
   >
     <div class="row q-col-gutter-lg">
       <div class="col-12 col-sm-8">
-        <template v-if="!loadingPosts">
+        <template v-if="!loadingPosts && posts.length">
           <q-card
             v-for="post in posts"
             :key="post.id"
@@ -39,6 +39,9 @@
           </q-card-section>
 
           </q-card>
+        </template>
+        <template v-else-if="!loadingPosts && !posts.length">
+          <h5 class="text-grey text-center">No Posts Yet.</h5>
         </template>
         <template v-else>
           <q-card flat bordered>
