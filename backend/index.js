@@ -42,6 +42,15 @@
   })
 
 /*
+  endpoint - createPost
+*/
+  app.get('/createPost', (request, response) => {
+    // CORS 세팅 : 모든 origin에 대해 모두 허용
+    response.set('Access-Control-Allow-Origin', '*')
+    response.send('creatPost')
+  })
+
+/*
   listen
 */
 // const port = 3000 app.listen(port, () => {console.log(`Example app listening at http://localhost:${port}`)})
