@@ -33,3 +33,8 @@ yarn-error.log*
 *.sln
 package-lock.json
 package.json
+
+# Firebase
+.firebase/hosting.ZGlzdA.cache
+firebase.json
+.firebaserc
