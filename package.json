@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "busboy": "^0.3.1",
     "core-js": "^3.6.5",
+    "firebase": "^8.8.1",
     "md-gum-polyfill": "^1.0.0",
     "quasar": "^1.15.22",
     "upgrade": "^1.1.0"

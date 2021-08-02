@@ -31,6 +31,10 @@ backend
   node index.js
   localhost:3000/posts 같은 결과
 
-. 버스보이 설치
+9. 버스보이 설치
   imcoming HTML form data 를 파실해주는 node.js 모듈
   npm install busboy
+
+10. uuid-v4 설치
+  npm install uuid-v4 --save
+  --unigue한 id 생성
