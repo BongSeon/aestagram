@@ -30,3 +30,7 @@ backend
   https://aestagram-backend.herokuapp.com/posts 테스트 성공
   node index.js
   localhost:3000/posts 같은 결과
+
+. 버스보이 설치
+  imcoming HTML form data 를 파실해주는 node.js 모듈
+  npm install busboy
