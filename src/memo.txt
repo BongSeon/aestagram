@@ -1,0 +1,9 @@
+설치한 퀘이자 플러그인
+1. Dialog
+2. Notify
+3. Loading
+
+확인
+quasar.conf.js
+  // Quasar plugins
+  plugins: ['Dialog', 'Notify', 'Loading']

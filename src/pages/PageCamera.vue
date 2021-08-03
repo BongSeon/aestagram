@@ -18,6 +18,7 @@
       <q-btn
         v-if="hasCameraSupport"
         @click="captureImage"
+        :disable="ImageCaptured"
         round
         color="grey-10"
         size="lg"
@@ -39,7 +40,7 @@
         <q-input
           v-model="post.caption"
           class="col col-sm-6"
-          label="Caption"
+          label="Caption *"
           dense
         />
       </div>
@@ -66,6 +67,7 @@
       <div class="row justify-center q-mt-lg">
         <q-btn
           @click="addPost()"
+          :disable="!post.caption || !post.photo"
           unelevated
           rounded
           color="primary"
@@ -202,6 +204,8 @@ export default {
       this.locationLoading = false
     },
     addPost() {
+      this.$q.loading.show()
+
       let formData = new FormData()
       formData.append('id', this.post.id)
       formData.append('caption', this.post.caption)
@@ -212,8 +216,22 @@ export default {
       this.$axios.post(`${ process.env.API }/createPost`, formData).then(
         response => {
           console.log('response:', response)
+          this.$router.push('/')
+          this.$q.notify({
+            message: 'Post created!',
+            avatar: 'https://blogpfthumb-phinf.pstatic.net/MjAyMDEwMDVfMTIx/MDAxNjAxOTAyNDgyNTMx.BSriRdPZ1q6zf_4_AnoyxTlNqeP3j8LPdDatjWjZAqcg.U9aLxWjubNO3KaV40_CQL5JBRHkAQskruUIYma9mpQgg.JPEG.iissy85/MU.jpeg?type=w161',
+            actions: [
+              { label: 'Close', color: 'white' }
+            ]
+          })
+          this.$q.loading.hide()
         }).catch(err => {
-          console.log('err:', err);
+          console.log('err:', err)
+          this.$q.dialog({
+            title: 'Error',
+            message: '쏘리, 포스트 생성에 실패했습니다.'
+          })
+          this.$q.loading.hide()
         })
     }
   },
