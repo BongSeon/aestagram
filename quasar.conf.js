@@ -76,7 +76,7 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       https: false,
-      port: 8080,
+      port: 8000,
       open: true // opens browser window automatically
     },
 
@@ -116,13 +116,13 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `Aestagram`,
+        name: `Aestagram - Share Your Everything !`,
         short_name: `Aestagram`,
-        description: `A Quasar Framework app`,
+        description: `Simple Instagram Clone - Made with Quasar`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#212121',
         icons: [
           {
             src: 'icons/icon-128x128.png',
