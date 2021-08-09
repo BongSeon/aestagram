@@ -69,7 +69,7 @@
           </q-card>
         </template>
       </div>
-      <div class="col-4">
+      <div class="col-4 large-screen-only">
         <q-item class="fixed">
           <q-item-section avatar>
             <q-avatar size="48px">
