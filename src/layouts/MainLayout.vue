@@ -40,53 +40,59 @@
       class="bg-white"
       bordered
     >
-      <div
-        v-if="showAppInstallBanner"
-        class="banner-container bg-primary"
+      <transition
+        appear
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
       >
-        <div class="constrain">
-          <q-banner
-            inline-actions
-            class="bg-primary text-white"
-            dense
-          >
-            <template v-slot:avatar>
-              <q-avatar
-                class="q-mt-3px"
-                color="white"
-                icon="eva-monitor-outline"
-                text-color="grey-10"
-                font-size="20px"
-              />
-            </template>
-            <b>Install Aestagam?</b>
+        <div
+          v-if="showAppInstallBanner"
+          class="banner-container bg-primary"
+        >
+          <div class="constrain">
+            <q-banner
+              inline-actions
+              class="bg-primary text-white"
+              dense
+            >
+              <template v-slot:avatar>
+                <q-avatar
+                  class="q-mt-3px"
+                  color="white"
+                  icon="eva-monitor-outline"
+                  text-color="grey-10"
+                  font-size="20px"
+                />
+              </template>
+              <b>Install Aestagam?</b>
 
-            <template v-slot:action>
-              <q-btn
-                @click="installApp"
-                class="q-px-sm"
-                flat
-                label="Yes"
-                dense
-              />
-              <q-btn
-                @click="showAppInstallBanner = false"
-                class="q-px-sm"
-                flat
-                label="Later"
-                dense
-              />
-              <q-btn
-                @click="neverShowAppInstallBanner"
-                class="q-px-sm"
-                flat
-                label="Never"
-                dense
-              />
-            </template>
-          </q-banner>
+              <template v-slot:action>
+                <q-btn
+                  @click="installApp"
+                  class="q-px-sm"
+                  flat
+                  label="Yes"
+                  dense
+                />
+                <q-btn
+                  @click="showAppInstallBanner = false"
+                  class="q-px-sm"
+                  flat
+                  label="Later"
+                  dense
+                />
+                <q-btn
+                  @click="neverShowAppInstallBanner"
+                  class="q-px-sm"
+                  flat
+                  label="Never"
+                  dense
+                />
+              </template>
+            </q-banner>
+          </div>
         </div>
-      </div>
+      </transition>
       <q-tabs
         class="text-grey-10 small-screen-only"
         active-color="primary"
@@ -152,8 +158,9 @@ export default {
         // Stash the event so it can be triggered later.
         deferredPrompt = e
         // Update UI notify the user they can install the PWA
-        this.showAppInstallBanner = true
-        console.log(`'beforeinstallprompt' event was fired.`)
+        setTimeout(() => {
+          this.showAppInstallBanner = true
+        }, 3000);
       })
     }
   }
