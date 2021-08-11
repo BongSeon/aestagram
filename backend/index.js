@@ -26,7 +26,7 @@
     
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: 'aestagram-kwak.appspot.com'
+    storageBucket: 'aestagram-pwa.appspot.com'
   });
 
   const db = admin.firestore()
