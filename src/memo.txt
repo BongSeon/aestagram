@@ -7,3 +7,6 @@
 quasar.conf.js
   // Quasar plugins
   plugins: ['Dialog', 'Notify', 'Loading']
+
+1. idb설치 indexDB API 관련 라이브러리 - front에 설치
+npm install idb --save

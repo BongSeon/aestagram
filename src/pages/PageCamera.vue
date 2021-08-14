@@ -103,6 +103,10 @@ export default {
     locationSupported() {
       if ('geolocation' in navigator) return true
       return false
+    },
+    backgroundSyncSupported() {
+      if ('serviceWorker' in navigator && 'SyncManager' in window) return true 
+      return false
     }
   },
   methods: {
@@ -227,10 +231,16 @@ export default {
           this.$q.loading.hide()
         }).catch(err => {
           console.log('err:', err)
-          this.$q.dialog({
-            title: 'Error',
-            message: '쏘리, 포스트 생성에 실패했습니다.'
-          })
+          if (!navigator.onLine && this.backgroundSyncSupported) {
+            this.$q.notify('Post created offline')
+            this.$router.push('/')
+          }
+          else {
+            this.$q.dialog({
+              title: 'Error',
+              message: '포스트 생성에 실패했습니다.'
+            })
+          }
           this.$q.loading.hide()
         })
     }

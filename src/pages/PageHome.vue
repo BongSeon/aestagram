@@ -91,6 +91,7 @@
 
 <script>
 import { date } from 'quasar'
+import { openDB } from 'idb'
 
 export default {
   name: 'PageHome',
@@ -106,12 +107,47 @@ export default {
       this.$axios.get(`${ process.env.API }/posts`).then(response => {
         this.posts = response.data
         this.loadingPosts = false
+        
+        // get offline posts
+        if (!navigator.onLine) {
+          this.getOfflinePost()
+        }
       }).catch(err => {
         this.$q.dialog({
           title: 'Error',
           message: '포스트를 가져올 수 없습니다.'
         })
         this.loadingPosts = false
+      })
+    },
+    getOfflinePost() {
+      let db = openDB('workbox-background-sync').then(db => {
+        db.getAll('requests').then(failedRequests => {
+          //console.log('failedRequests: ', failedRequests)
+          failedRequests.forEach(failedRequest => {
+            if (failedRequest.queueName == 'createPostQueue') {
+              let request = new Request(failedRequest.requestData.url, failedRequest.requestData)
+              request.formData().then(formData => {
+                let offlinePost = {}
+                offlinePost.id = formData.get('id')
+                offlinePost.caption = formData.get('caption')
+                offlinePost.location = formData.get('location')
+                offlinePost.date = parseInt(formData.get('date'))
+                offlinePost.offline = true
+
+                let reader = new FileReader()
+                reader.readAsDataURL(formData.get('file'))
+                reader.onloadend = () => {
+                  offlinePost.imageUrl = reader.result
+                  this.posts.unshift(offlinePost) // posts[] 맨처음에 삽입
+                }
+
+              })
+            }
+          })
+        }).catch(err => {
+          console.log('Error accessing IndexedDB: ', err);
+        })
       })
     }
   },
