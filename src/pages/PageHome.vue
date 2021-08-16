@@ -9,9 +9,17 @@
             v-for="post in posts"
             :key="post.id"
             class="card-post q-mb-md"
+            :class="{ 'bg-red-1' : post.offline }"
             flat
             bordered
           >
+          <q-badge
+            v-if="post.offline"
+            class="badge-offline absolute-top-right q-mt-xs q-mr-xs"
+            color="red"
+          >
+            stored offline
+          </q-badge>
           <q-item>
             <q-item-section avatar>
               <q-avatar>
@@ -164,6 +172,8 @@ export default {
 
 <style lang="sass">
   .card-post
+    .badge-offline
+      border-radius: 4px !important
     .q-img
       min-height: 200px
 </style>
