@@ -29,10 +29,35 @@
 
 /*
   queue - createPost
+  큐(createPostQueue)에 저장된 request를 수행하는 부분 
+  성공시에 offline post의 스타일이 제거될 수 있도록 
+  client 측에도 message를 보내준다.
 */
   let createPostQueue = null
   if (backgroundSyncSupported) {
-    createPostQueue = new Queue('createPostQueue');
+    createPostQueue = new Queue('createPostQueue', {
+      onSync: async ({queue}) => {
+        console.log('onSync start!');
+        let entry;
+        while (entry = await queue.shiftRequest()) {
+          try {
+            await fetch(entry.request);
+            console.log('Replay successful for request', entry.request);
+
+            // send message from service worker 메시지 보내는 부분
+            const channel = new BroadcastChannel('sw-messages')
+            channel.postMessage({ msg: 'offline-post-uploaded' })
+          } catch (error) {
+            console.error('Replay failed for request', entry.request, error);
+    
+            // Put the entry back in the queue and re-throw the error:
+            await queue.unshiftRequest(entry);
+            throw error;
+          }
+        }
+        console.log('Replay complete!');
+      }
+    });
   }
 
 /*
@@ -77,7 +102,7 @@
         return;
       }
       
-      //console.log('url: ', event.request.url);
+      console.log('url: ', event.request.url);
       if (event.request.url.endsWith('/createPost')) {
         const promiseChain = fetch(event.request.clone()).catch((err) => {
           return createPostQueue.pushRequest({request: event.request})

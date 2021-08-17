@@ -110,7 +110,10 @@
     </q-footer>
 
     <q-page-container class="bg-grey-1">
-      <router-view />
+      <!-- PageHome 페이지만 keep alive 적용 -->
+      <keep-alive :include="['PageHome']">
+        <router-view />
+      </keep-alive>
     </q-page-container>
   </q-layout>
 </template>

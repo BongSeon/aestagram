@@ -109,6 +109,12 @@ export default {
       loadingPosts: false
     }
   },
+  computed: {
+    serviceWorkerSupported() {
+      if ('serviceWorker' in navigator) return true
+      return false
+    }
+  },
   methods: {
     getPosts() {
       this.loadingPosts = true
@@ -157,6 +163,15 @@ export default {
           console.log('Error accessing IndexedDB: ', err);
         })
       })
+    },
+    listenForOfflinePostUploaded() {
+      if (this.serviceWorkerSupported) {
+        console.log('listenForOfflinePostUploaded');
+        const channel = new BroadcastChannel('sw-messages')
+        channel.addEventListener('message', event => {
+          console.log('Received', event.data);
+        })
+      }
     }
   },
   filters: {
@@ -164,8 +179,13 @@ export default {
       return date.formatDate(value, 'MMMM DD h:ssA')
     }
   },
-  created() {
+  activated() {
+    // 매번 실행된다.
     this.getPosts()
+  },
+  created() {
+    // MainLayout에서 keep-alive를 적용했기 때문에 created 훅은 한번만 실행된다.
+    this.listenForOfflinePostUploaded()
   }
 }
 </script>
